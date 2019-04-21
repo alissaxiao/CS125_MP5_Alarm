@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     android:orientation="vertical"
-    tools:context=".math">
+    >
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -20,11 +20,13 @@
             android:id="@+id/equation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight=".25"
             android:background="@color/colorPrimary"
             android:gravity="end"
             android:maxLines="1"
-            android:textColor="@color/colorPrimaryDark" />
+            android:text="3 + 5 = "
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/ret"

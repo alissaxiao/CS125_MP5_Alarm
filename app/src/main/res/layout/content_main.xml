@@ -13,7 +13,7 @@
         android:layout_width="350dp"
         android:layout_height="372dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="268dp"
         android:layout_marginRight="8dp"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -24,19 +24,34 @@
         android:id="@+id/switch1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:text="Switch"
+        android:text="Alarm 1"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/switch2"
-        app:layout_constraintHorizontal_bias="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
 
     <Switch
         android:id="@+id/switch2"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="72dp"
-        android:text="Switch"
+        android:layout_marginTop="120dp"
+        android:text="Alarm 2"
+        android:textSize="30sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switch3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="180dp"
+        android:text="Alarm 3"
+        android:textSize="30sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

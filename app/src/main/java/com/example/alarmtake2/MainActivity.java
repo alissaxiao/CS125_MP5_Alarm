@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "add alarm", Snackbar.LENGTH_LONG)
                         .setAction("add alarm", null).show();
 
-
             }
         });
     }
