@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TimePicker;
+import android.content.Intent;
 import android.util.TimeUtils;
 import android.app.AlarmManager;
 
@@ -31,11 +33,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Switch swit = findViewById(R.id.switch1);
+        swit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MathPage();
+            }
+        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         alarmTime = findViewById(R.id.switch1);
-        currentTime = findViewById(R.id.alarmTimePicker);
+        currentTime = findViewById(R.id.switch2);
         final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
@@ -48,10 +56,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }, 0, 1000);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "add alarm", Snackbar.LENGTH_LONG)
+                        .setAction("add alarm", null).show();
+
+            }
+        });
+    }
+    public void MathPage() {
+        Intent intent = new Intent(this, MathPage.class);
+        startActivity(intent);
+        setContentView(R.layout.math);
+
     }
     public String alarmTime() {
-        Integer hours = alarmTime.getCurrentHour();
-        Integer minutes = alarmTime.getCurrentMinute();
+        Integer hours = Calendar.HOUR;
+        Integer minutes = Calendar.MINUTE;
         String setAlarmTime;
         String alarmMin;
         if (minutes < 10) {
@@ -67,16 +90,6 @@ public class MainActivity extends AppCompatActivity {
             setAlarmTime = hours.toString().concat(":").concat(minutes.toString()).concat("AM");
         }
         return setAlarmTime;
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "add alarm", Snackbar.LENGTH_LONG)
-                        .setAction("add alarm", null).show();
-
-            }
-        });
     }
 
     @Override

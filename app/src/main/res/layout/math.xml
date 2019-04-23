@@ -144,11 +144,6 @@
                 android:id="@+id/decimal"
                 style="@style/calc"
                 android:text="." />
-
-            <TextView
-                android:id="@+id/delete"
-                style="@style/calc"
-                android:text="<-" />
         </LinearLayout>
 
     </LinearLayout>
