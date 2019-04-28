@@ -38,12 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         picker = findViewById(R.id.alarmTimePicker);
-        currentTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MathPage();
-            }
-        });
+        currentTime = findViewById(R.id.textClock);
         final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
