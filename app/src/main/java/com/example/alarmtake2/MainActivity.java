@@ -13,11 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.content.Intent;
 import android.util.TimeUtils;
 import android.app.AlarmManager;
+
+import org.w3c.dom.Text;
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -27,12 +30,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    AlarmManager manager;
     TimePicker picker;
-    TextView updateTime;
-    Context context;
-    Button alarmTime;
-    Button currentTime;
+    TextClock currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
