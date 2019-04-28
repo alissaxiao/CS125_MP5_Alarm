@@ -26,28 +26,29 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    TimePicker picker;
+    TimePicker alarmTime;
     TextClock currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        picker = findViewById(R.id.alarmTimePicker);
+        alarmTime = findViewById(R.id.alarmTimePicker);
         currentTime = findViewById(R.id.textClock);
         final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (currentTime.getText().toString().equals(alarmTime())) {
+                r.stop();
+                if (alarmTime().contains(currentTime.getText().toString())) {
                     r.play();
-                } else {
-                    r.stop();
                 }
             }
         }, 0, 1000);
@@ -59,23 +60,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public String alarmTime() {
-        Integer hours = Calendar.HOUR;
-        Integer minutes = Calendar.MINUTE;
-        String setAlarmTime;
-        String alarmMin;
-        if (minutes < 10) {
-            alarmMin = "0";
-            alarmMin = alarmMin.concat(alarmMin.toString());
-        } else {
-            alarmMin = minutes.toString();
-        }
-        if (hours > 12) {
-            hours = hours - 12;
-            setAlarmTime = hours.toString().concat(":").concat(minutes.toString()).concat("PM");
-        } else {
-            setAlarmTime = hours.toString().concat(":").concat(minutes.toString()).concat("AM");
-        }
-        return setAlarmTime;
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT-5:00"));
+        Date d = c.getTime();
+        DateFormat date = new SimpleDateFormat("hh:mm a");
+        date.setTimeZone(TimeZone.getTimeZone("GMT-5:00"));
+        String now = date.format(d);
+//        Integer hours = Calendar.HOUR;
+//        Integer minutes = Calendar.MINUTE;
+//        String alarmMin;
+//        if (minutes < 10) {
+//            alarmMin = "0";
+//            alarmMin = alarmMin.concat(alarmMin.toString());
+//        } else {
+//            alarmMin = minutes.toString();
+//        }
+//        if (hours > 12) {
+//            hours = hours - 12;
+//            setAlarmTime = hours.toString().concat(":").concat(minutes.toString()).concat("PM");
+//        } else {
+//            setAlarmTime = hours.toString().concat(":").concat(minutes.toString()).concat("AM");
+//        }
+
+        return now;
     }
 
     @Override
