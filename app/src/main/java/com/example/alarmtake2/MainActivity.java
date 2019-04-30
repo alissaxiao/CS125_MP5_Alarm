@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,67 +36,82 @@ public class MainActivity extends AppCompatActivity {
     TimePicker alarmTime;
     TextClock currentTime;
     ToggleButton alarmTrigger;
+    AlarmManager manager;
 
+//    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         alarmTime = findViewById(R.id.alarmTimePicker);
         currentTime = findViewById(R.id.textClock);
-        alarmTrigger = findViewById(R.id.alarmTrigger);
-        alarmTrigger.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                }
-            }
-        });
-
+//        currentTime.setFormat24Hour("hh:mm a");
+//        alarmTrigger = findViewById(R.id.alarmTrigger);
+//        manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmTrigger.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    if (alarmTime().contains(currentTime.getText().toString())) {
+//                        r.play();
+//                    }
+//                } else {
+//                    r.stop();
+//                }
+//            }
+//        });
+//    }
+        final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
-
+            //Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
             @Override
             public void run() {
-                r.stop();
-                if (alarmTime().contains(currentTime.getText().toString())) {
+                if (currentTime.getText().toString().equals(AlarmTime())) {
+                    System.out.println("current" + currentTime.getText().toString());
+                    System.out.println("alarm" + AlarmTime());
                     r.play();
+                } else {
+                    System.out.println("current" + currentTime.getText().toString());
+                    System.out.println("alarm" + AlarmTime());
+                    r.stop();
+
                 }
             }
         }, 0, 1000);
     }
-    public void MathPage() {
-        Intent intent = new Intent(this, MathPage.class);
-        //setContentView(R.layout.math);
-        startActivity(intent);
-
-    }
-    public String alarmTime() {
-        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT-5:00"));
-        Date d = c.getTime();
-        DateFormat date = new SimpleDateFormat("hh:mm a");
-        date.setTimeZone(TimeZone.getTimeZone("GMT-5:00"));
-        String now = date.format(d);
-//        Integer hours = Calendar.HOUR;
-//        Integer minutes = Calendar.MINUTE;
-//        String alarmMin;
-//        if (minutes < 10) {
-//            alarmMin = "0";
-//            alarmMin = alarmMin.concat(alarmMin.toString());
-//        } else {
-//            alarmMin = minutes.toString();
-//        }
-//        if (hours > 12) {
-//            hours = hours - 12;
-//            setAlarmTime = hours.toString().concat(":").concat(minutes.toString()).concat("PM");
-//        } else {
-//            setAlarmTime = hours.toString().concat(":").concat(minutes.toString()).concat("AM");
-//        }
-
-        return now;
+//    public void MathPage() {
+//        Intent intent = new Intent(this, MathPage.class);
+//        //setContentView(R.layout.math);
+//        startActivity(intent);
+//
+//    }
+    public String AlarmTime() {
+//        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT-5:00"));
+//        Date d = c.getTime();
+//        DateFormat date = new SimpleDateFormat("hh:mm a");
+//        date.setTimeZone(TimeZone.getTimeZone("GMT-5:00"));
+//        String now = date.format(d);
+        Integer hours = alarmTime.getHour();
+        Integer minutes = alarmTime.getMinute();
+        String alarmMin;
+        if (minutes < 10) {
+            alarmMin = "0";
+            alarmMin = alarmMin.concat(minutes.toString());
+        } else {
+            alarmMin = minutes.toString();
+        }
+        String AT;
+        if (hours > 12) {
+            hours = hours - 12;
+            AT = hours.toString().concat(":").concat(alarmMin).concat(" PM");
+        } else {
+            AT = hours.toString().concat(":").concat(alarmMin).concat(" AM");
+        }
+        return AT;
     }
 
     @Override
