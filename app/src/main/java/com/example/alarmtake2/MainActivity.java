@@ -4,21 +4,21 @@ import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.Switch;
+import android.widget.CompoundButton;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.content.Intent;
 import android.util.TimeUtils;
 import android.app.AlarmManager;
+import android.widget.ToggleButton;
+import android.app.PendingIntent;
 
 import org.w3c.dom.Text;
 
@@ -34,6 +34,8 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     TimePicker alarmTime;
     TextClock currentTime;
+    ToggleButton alarmTrigger;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         alarmTime = findViewById(R.id.alarmTimePicker);
         currentTime = findViewById(R.id.textClock);
-        final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        alarmTrigger = findViewById(R.id.alarmTrigger);
+        alarmTrigger.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                }
+            }
+        });
+
         Timer t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+
             @Override
             public void run() {
                 r.stop();
